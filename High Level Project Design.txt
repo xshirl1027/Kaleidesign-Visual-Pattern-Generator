@@ -3,10 +3,3 @@ Project description: Computer Generated Visual Patterns: Customizable Digital Ka
 -Any drawing on one grid translates to identical or permutated drawing on all other grids/net
 
 examples in folder
-Language: 3.Python:Very Easy, 1.C++:Very Hard, 4.Javascript:Hard, 2.Java: Easy
-
-TODO:
-Research and decide on language : JAVA
-Design data structure to store visual unit
-Design transformation method of unit
-
