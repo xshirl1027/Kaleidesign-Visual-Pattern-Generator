@@ -1,5 +1,0 @@
-Project description: Computer Generated Visual Patterns: Customizable Digital Kaleidoscope
--User will choose how to segment screen into grids/net for pattern: premade nets should be available
--Any drawing on one grid translates to identical or permutated drawing on all other grids/net
-
-examples in folder
