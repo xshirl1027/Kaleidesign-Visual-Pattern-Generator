@@ -4,8 +4,7 @@ public class Squnit {
 	private int localy;
 	private int size;
 	
-	@SuppressWarnings("unused")
-	private void Vunit(int x, int y, int size){
+	public Squnit(int x, int y, int size){
 		this.localx = x;
 		this.localy = y;
 		this.size = size;

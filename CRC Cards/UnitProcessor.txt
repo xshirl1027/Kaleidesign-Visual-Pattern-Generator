@@ -1,5 +1,13 @@
+Pattern: Observer
 Args: Pattern Type(Rotated Slices, Grids, Rectangular), Segment Size(Angle or Size)
 
+general:
 -initialize screen by creating an array of 'units'
 -detect paintbrush and figure out which unit is being drawn on
 -make sure that every unit is updated along with that unit
+
+RadUnitHandler
+
+SqUnitHandler
+
+RecUnitHandler
