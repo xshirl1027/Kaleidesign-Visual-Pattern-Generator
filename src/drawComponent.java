@@ -10,6 +10,5 @@ public class drawComponent extends JComponent{
 		g2.draw(rec);
 		rec.setLocation(getMousePosition());
 		g2.draw(rec);
-
 	}
 }

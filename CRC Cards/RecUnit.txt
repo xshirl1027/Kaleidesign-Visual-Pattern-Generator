@@ -1,0 +1,3 @@
+args: localx, localy, width, height
+
+-returns true if given coord falls on unit

@@ -1,0 +1,3 @@
+args: angle of slice, starting coordinate, ending coordinate
+
+-return true if an given coordinate is on the 'slice'
