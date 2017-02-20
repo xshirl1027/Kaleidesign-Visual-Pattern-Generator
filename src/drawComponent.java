@@ -58,7 +58,7 @@ super.paintComponent(g);  // Fill with background color (white).
 int width = getWidth();    // Width of the panel.
 int height = getHeight();  // Height of the panel.
 
-int colorSpacing = (height - 56) / 7;
+int colorSpacing = (height ) / 7;
 // Distance between the top of one colored rectangle in the palette
 // and the top of the rectangle below it.  The height of the
 // rectangle will be colorSpacing - 3.  There are 7 colored rectangles,
@@ -76,8 +76,8 @@ Squnit[][] scrn = new Squnit[scrx/w+1][scry/w+1];
 Graphics2D g2 = (Graphics2D) g;
 graphicsForDrawing = g;
 Rectangle rec = new Rectangle(0,0,w,w);
-for (int j=0; j<(scry/w); j++){
-	for(int i=0; i<(scrx/w);i++){
+for (int j=0; j<=(scry/w); j++){
+	for(int i=0; i<=(scrx/w);i++){
 		scrn[i][j] = new Squnit(i*w, j*w, w);
 		rec.setLocation(i*w, j*w);
 		graphicsForDrawing.setColor(new Color(50+i*5,50+j*6, i*j*2));
@@ -94,31 +94,7 @@ for (int j=0; j<(scry/w); j++){
 * (Note that I can't just call repaint and redraw the whole
 * panel, since that would erase the user's drawing!)
 */
-private void changeColor(int y) {
 
-int width = getWidth();           // Width of applet.
-int height = getHeight();         // Height of applet.
-int colorSpacing = (height - 56) / 7;  // Space for one color rectangle.
-int newColor = y / colorSpacing;       // Which color number was clicked?
-
-if (newColor < 0 || newColor > 6)      // Make sure the color number is valid.
-return;
-
-/* Remove the hilite from the current color, by drawing over it in gray.
-Then change the current drawing color and draw a hilite around the
-new drawing color.  */
-
-Graphics g = getGraphics();
-g.setColor(Color.GRAY);
-g.drawRect(width-55, 1 + currentColor*colorSpacing, 53, colorSpacing);
-g.drawRect(width-54, 2 + currentColor*colorSpacing, 51, colorSpacing-2);
-currentColor = newColor;
-g.setColor(Color.WHITE);
-g.drawRect(width-55, 1 + currentColor*colorSpacing, 53, colorSpacing);
-g.drawRect(width-54, 2 + currentColor*colorSpacing, 51, colorSpacing-2);
-g.dispose();
-
-} // end changeColor()
 
 
 /**
@@ -154,17 +130,7 @@ if (dragging == true)  // Ignore mouse presses that occur
 return;            //    when user is already drawing a curve.
                  //    (This can happen if the user presses
                  //    two mouse buttons at the same time.)
-
-if (x > width - 53) {
-// User clicked to the right of the drawing area.
-// This click is either on the clear button or
-// on the color palette.
-if (y > height - 53)
-repaint();       //  Clicked on "CLEAR button".
-else
-changeColor(y);  // Clicked on the color palette.
-}
-else if (x > 3 && x < width - 56 && y > 3 && y < height - 3) {
+else {
 // The user has clicked on the white drawing area.
 // Start drawing a curve from the point (x,y).
 prevX = x;
@@ -206,15 +172,7 @@ return;  // Nothing to do because the user isn't drawing.
 int x = evt.getX();   // x-coordinate of mouse.
 int y = evt.getY();   // y-coordinate of mouse.
 
-if (x < 3)                          // Adjust the value of x,
-x = 3;                           //   to make sure it's in
-if (x > getWidth() - 57)       //   the drawing area.
-x = getWidth() - 57;
 
-if (y < 3)                          // Adjust the value of y,
-y = 3;                           //   to make sure it's in
-if (y > getHeight() - 4)       //   the drawing area.
-y = getHeight() - 4;
 
 graphicsForDrawing.drawLine(prevX, prevY, x, y);  // Draw the line.
 
