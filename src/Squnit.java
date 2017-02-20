@@ -17,11 +17,11 @@ public class Squnit {
 		return this.localy;
 	}
 	
-	public Point getTransformed(int x, int y){
-		Point newpt = new Point();
-		newpt.setLocation(x-localx, y-localy);
-		return newpt;
-		
+	public int getTransformedX(int x){
+		return x-localx;
+	}
+	public int getTransformedY(int y){
+		return y-localy;
 	}
 	//checks if coordinate (x,y) is inside this unit
 	public boolean withinRange(int x, int y){

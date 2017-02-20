@@ -37,7 +37,8 @@ private Squnit currUnit;
 
 private static int w = 100;
 private Squnit[][] scrn;
-
+private int width;    // Width of the panel.
+private int height;
 /**
 * Constructor for SimplePaintPanel class sets the background color to be
 * white and sets it to listen for mouse events on itself.
@@ -58,8 +59,8 @@ public void paintComponent(Graphics g) {
 
 super.paintComponent(g);  // Fill with background color (white).
 
-int width = getWidth();    // Width of the panel.
-int height = getHeight();  // Height of the panel.
+width = getWidth();    // Width of the panel.
+height = getHeight();  // Height of the panel.
 
 int colorSpacing = (height ) / 7;
 // Distance between the top of one colored rectangle in the palette
@@ -115,6 +116,18 @@ break;
 } // end setUpDrawingGraphics()
 
 
+public void getSqunitAtMouse(int height, int width, int x, int y){
+	for (int i = 0; i<=height/w; i++){
+		for(int j = 0; j<=width/w; j++){
+			if(scrn[i][j].withinRange(x, y)){
+				currUnit = scrn[i][j];
+				System.out.println(currUnit.getString());
+				break;
+			}
+		}	
+	}
+}
+
 /**
 * This is called when the user presses the mouse anywhere in the applet.  
 * There are three possible responses, depending on where the user clicked:  
@@ -131,15 +144,7 @@ int y = evt.getY();   // y-coordinate where the user clicked.
 int width = getWidth();    // Width of the panel.
 int height = getHeight();  // Height of the panel.
 
-for (int i = 0; i<=height/w; i++){
-	for(int j = 0; j<=width/w; j++){
-		if(scrn[i][j].withinRange(x, y)){
-			currUnit = scrn[i][j];
-			System.out.println(currUnit.getString());
-			break;
-		}
-	}	
-}
+getSqunitAtMouse(height,width, x ,y);
 
 if (dragging == true)  // Ignore mouse presses that occur
 return;            //    when user is already drawing a curve.
@@ -170,6 +175,15 @@ graphicsForDrawing.dispose();
 graphicsForDrawing = null;
 }
 
+private void drawAll(int x, int y, int prevX, int prevY){
+	int incX = currUnit.getTransformedX(x);
+	int incY = currUnit.getTransformedY(y);
+	for (int i=0; i<height/w; i++){
+		for (int j=0; j<width/w; j++){
+			graphicsForDrawing.fillOval(scrn[i][j].getX()+incX, scrn[i][j].getY()+incY, 2, 2);
+		}
+	}
+}
 
 /**
 * Called whenever the user moves the mouse while a mouse button is held down.  
@@ -187,13 +201,13 @@ return;  // Nothing to do because the user isn't drawing.
 int x = evt.getX();   // x-coordinate of mouse.
 int y = evt.getY();   // y-coordinate of mouse.
 
+getSqunitAtMouse(getHeight(),getWidth(), x ,y);
 
-
-graphicsForDrawing.drawLine(prevX, prevY, x, y);  // Draw the line.
-graphicsForDrawing.drawLine(prevX-1, prevY-1, x-1, y-1);  // Draw the line.
+  // Draw the line.
 //graphicsForDrawing.fillOval(x, y, 2, 2); //create a layered effect
 prevX = x;  // Get ready for the next line segment in the curve.
 prevY = y;
+drawAll(prevX,prevY,x,y);
 
 } // end mouseDragged()
 
