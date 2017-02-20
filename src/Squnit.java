@@ -9,13 +9,11 @@ public class Squnit {
 		this.localy = y;
 		this.size = size;
 	}
-	public int[] getRangeX(){
-		int[] tup = {this.localx, this.localx+size};
-		return tup;
+	public int getX(){
+		return this.localx;
 	}
-	public int[] getRangeY(){
-		int[]tup = {this.localy, this.localy+size};
-		return tup;
+	public int getY(){
+		return this.localy;
 	}
 	//checks if coordinate (x,y) is inside this unit
 	public boolean withinRange(int x, int y){
