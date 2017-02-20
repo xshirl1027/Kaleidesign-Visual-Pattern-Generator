@@ -33,7 +33,10 @@ private boolean dragging;      // This is set to true while the user is drawing.
 
 private Graphics graphicsForDrawing;  // A graphics context for the panel
                    // that is used to draw the user's curve.
+private Squnit currUnit;
 
+private static int w = 100;
+private Squnit[][] scrn;
 
 /**
 * Constructor for SimplePaintPanel class sets the background color to be
@@ -71,16 +74,16 @@ int colorSpacing = (height ) / 7;
 corner of the applet, allowing for a 3-pixel border. */
 int scrx = width;
 int scry = height;
-int w = 100;
-Squnit[][] scrn = new Squnit[scrx/w+1][scry/w+1];
+
 Graphics2D g2 = (Graphics2D) g;
 graphicsForDrawing = g;
 Rectangle rec = new Rectangle(0,0,w,w);
-for (int j=0; j<=(scry/w); j++){
-	for(int i=0; i<=(scrx/w);i++){
-		scrn[i][j] = new Squnit(i*w, j*w, w);
+scrn = new Squnit[getHeight()/w+1][getWidth()/w+1];
+for (int i=0; i<=(getHeight()/w); i++){
+	for(int j=0; j<=(getWidth()/w);j++){
+		scrn[i][j] = new Squnit(j*w, i*w, w);
 		rec.setLocation(i*w, j*w);
-		graphicsForDrawing.setColor(new Color(50+i*5,50+j*6, i*j*2));
+		graphicsForDrawing.setColor(new Color(i*5,j*6, i*j*2));
 		graphicsForDrawing.fillRect(scrn[i][j].getX(), scrn[i][j].getY(), w,w);
 	}
 }
@@ -123,8 +126,20 @@ public void mousePressed(MouseEvent evt) {
 int x = evt.getX();   // x-coordinate where the user clicked.
 int y = evt.getY();   // y-coordinate where the user clicked.
 
+
+
 int width = getWidth();    // Width of the panel.
 int height = getHeight();  // Height of the panel.
+
+for (int i = 0; i<=height/w; i++){
+	for(int j = 0; j<=width/w; j++){
+		if(scrn[i][j].withinRange(x, y)){
+			currUnit = scrn[i][j];
+			System.out.println(currUnit.getString());
+			break;
+		}
+	}	
+}
 
 if (dragging == true)  // Ignore mouse presses that occur
 return;            //    when user is already drawing a curve.
@@ -175,7 +190,8 @@ int y = evt.getY();   // y-coordinate of mouse.
 
 
 graphicsForDrawing.drawLine(prevX, prevY, x, y);  // Draw the line.
-
+graphicsForDrawing.drawLine(prevX-1, prevY-1, x-1, y-1);  // Draw the line.
+//graphicsForDrawing.fillOval(x, y, 2, 2); //create a layered effect
 prevX = x;  // Get ready for the next line segment in the curve.
 prevY = y;
 
