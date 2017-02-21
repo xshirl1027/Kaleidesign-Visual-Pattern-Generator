@@ -45,21 +45,23 @@ implements MouseListener, MouseMotionListener {
 		center = new Point();
 		center.x = width/2; 
 		center.y = height/2;
-		angle = 45;
+		angle = 360/10;
 		graphicsForDrawing = g;
 		setUpDrawingGraphics();
-		Graphics2D g2d = (Graphics2D) g.create();
+		Graphics2D g2d;
 		//g2d.drawLine(center.x,, center.x, center.y);
 		for(int i=0; i<=360/angle; i++){
+			g2d = (Graphics2D) g.create();
 			System.out.println(center.y);
 			g2d.setColor(Color.black);
 			g2d.translate(width/2, height/2);
 			g2d.rotate(Math.toRadians(i*angle));
 			g2d.translate(-width/2, -height/2);
-			g2d.drawLine(center.x,  -center.y, center.x, center.y);
+			g2d.drawLine(center.x, 0, center.x, center.y);
+			g2d.dispose();
 
 		}
-		g2d.dispose();
+		
 	}
 	
 	private void setUpDrawingGraphics() {
