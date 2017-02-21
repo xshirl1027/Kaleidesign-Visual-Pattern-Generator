@@ -45,9 +45,21 @@ implements MouseListener, MouseMotionListener {
 		center = new Point();
 		center.x = width/2; 
 		center.y = height/2;
-		angle = 1;
+		angle = 45;
 		graphicsForDrawing = g;
 		setUpDrawingGraphics();
+		Graphics2D g2d = (Graphics2D) g.create();
+		//g2d.drawLine(center.x,, center.x, center.y);
+		for(int i=0; i<=360/angle; i++){
+			System.out.println(center.y);
+			g2d.setColor(Color.black);
+			g2d.translate(width/2, height/2);
+			g2d.rotate(Math.toRadians(i*angle));
+			g2d.translate(-width/2, -height/2);
+			g2d.drawLine(center.x,  -center.y, center.x, center.y);
+
+		}
+		g2d.dispose();
 	}
 	
 	private void setUpDrawingGraphics() {
@@ -74,7 +86,17 @@ implements MouseListener, MouseMotionListener {
 			  // Draw the line.
 			//graphicsForDrawing.fillOval(x, y, 2, 2); //create a layered effect
 
-			graphicsForDrawing.drawLine(prevX, prevY, x, y);
+			//graphicsForDrawing.drawLine(prevX, prevY, x, y);
+			for(int i=0; i<=360/angle; i++){
+				Graphics2D g2d = (Graphics2D) graphicsForDrawing.create();
+				g2d.setColor(Color.blue);
+				g2d.translate(width/2, height/2);
+				g2d.rotate(Math.toRadians(i*angle));
+				g2d.translate(-width/2, -height/2);
+				g2d.drawLine(prevX, prevY, x, y);
+				g2d.dispose();
+			}
+			
 			prevX = x;  // Get ready for the next line segment in the curve.
 			prevY = y;
 	}
