@@ -20,6 +20,11 @@ import javax.swing.*;
 public class Kaleidesign extends JApplet {
    
    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+/**
     * The main routine opens a window that displays a drawing area
     * and color palette.  This main routine allows this class to
     * be run as a stand-alone application as well as as an applet.
@@ -28,7 +33,7 @@ public class Kaleidesign extends JApplet {
     */
    public static void main(String[] args) {
       JFrame window = new JFrame("Simple Paint");
-      drawComponent content = new drawComponent();
+      RadPattern content = new RadPattern();
       window.setContentPane(content);
       window.setSize(1400,750);
       window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -42,7 +47,7 @@ public class Kaleidesign extends JApplet {
     * by the SimplePaintPanel.
     */
    public void init() {
-      setContentPane( new drawComponent() );
+      setContentPane( new RadPattern() );
    }
    
    

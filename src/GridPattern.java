@@ -12,7 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-public class drawComponent extends JPanel
+public class GridPattern extends JPanel
 implements MouseListener, MouseMotionListener {
 
 /**
@@ -43,7 +43,7 @@ private int height;
 * Constructor for SimplePaintPanel class sets the background color to be
 * white and sets it to listen for mouse events on itself.
 */
-drawComponent() {
+GridPattern() {
 setBackground(Color.WHITE);
 addMouseListener(this);
 addMouseMotionListener(this);
@@ -139,10 +139,6 @@ public void mousePressed(MouseEvent evt) {
 int x = evt.getX();   // x-coordinate where the user clicked.
 int y = evt.getY();   // y-coordinate where the user clicked.
 
-
-
-int width = getWidth();    // Width of the panel.
-int height = getHeight();  // Height of the panel.
 
 getSqunitAtMouse(height,width, x ,y);
 
