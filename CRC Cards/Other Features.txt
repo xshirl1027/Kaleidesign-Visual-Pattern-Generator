@@ -1,0 +1,5 @@
+EdgeLock: For RadPatterns, there should be a lock around the edges of each segment, such that if you click within a range,
+your mouse will be 'locked' onto the edge line.
+User Interface for variables such as number of divisions within pattern, thickness of line and color, type of brush
+Brush Types: Marker, paintbrush, other fancy brushes
+Fill area: fill an enclosed area with paint
