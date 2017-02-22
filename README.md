@@ -9,7 +9,7 @@ How am I different from my competitors?
 
 -will be able to fill enclosed areas with different colors
 
--different pen styles: brush, ball-point, marker
+-different pen styles: brush, ball-point, marker, fireworks
 
 -you will be able to upload images, save
 
