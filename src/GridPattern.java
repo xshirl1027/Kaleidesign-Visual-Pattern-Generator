@@ -6,17 +6,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 
 public class GridPattern extends Pattern {
 
 private boolean dragging;      // This is set to true while the user is drawing.
 private Squnit currUnit;
-private static int grid = 100;
+private int grid_size = 100;
 private Squnit[][] scrn;
 
-public GridPattern(int w, int h) {
+public GridPattern(int w, int h, int s) {
 	super(w, h);
+	this.grid_size = s;
 	// TODO Auto-generated constructor stub
 }
 /**
@@ -29,14 +31,14 @@ public void paintComponent(Graphics g) {
 	super.paintComponent(g);  // Fill with background color (white).
 	
 	graphicsForDrawing = (Graphics2D) g;
-	Rectangle rec = new Rectangle(0,0,grid,grid);
-	scrn = new Squnit[getHeight()/grid+1][getWidth()/grid+1];
-	for (int i=0; i<=(getHeight()/grid); i++){
-		for(int j=0; j<=(getWidth()/grid);j++){
-			scrn[i][j] = new Squnit(j*grid, i*grid, grid);
-			rec.setLocation(i*grid, j*grid);
-			graphicsForDrawing.setColor(new Color(i*5,j*6, i*j*2));
-			graphicsForDrawing.fillRect(scrn[i][j].getX(), scrn[i][j].getY(), grid,grid);
+	Rectangle rec = new Rectangle(0,0,grid_size,grid_size);
+	scrn = new Squnit[height/grid_size+2][width/grid_size+2];
+	for (int i=0; i<=(getHeight()/grid_size)+1; i++){
+		for(int j=0; j<=(getWidth()/grid_size)+1;j++){
+			scrn[i][j] = new Squnit(j*grid_size, i*grid_size, grid_size);
+			rec.setLocation(i*grid_size, j*grid_size);
+			graphicsForDrawing.setColor(new Color((int) (Math.random()*20)+50,(int) (Math.random()*20)+50,(int) (Math.random()*20)+50));
+			graphicsForDrawing.fillRect(scrn[i][j].getX(), scrn[i][j].getY(), grid_size,grid_size);
 		}
 	}
 	setUpDrawingGraphics(pen_size);
@@ -50,11 +52,10 @@ public void paintComponent(Graphics g) {
 */
 
 public void getSqunitAtMouse(int height, int width, int x, int y){
-	for (int i = 0; i<height/grid; i++){
-		for(int j = 0; j<width/grid; j++){
+	for (int i = 0; i<=height/grid_size; i++){
+		for(int j = 0; j<=width/grid_size; j++){
 			if(scrn[i][j].withinRange(x, y)){
 				currUnit = scrn[i][j];
-				System.out.println(currUnit.getString());
 				break;
 			}
 		}	
@@ -103,9 +104,20 @@ private void drawAll(int x, int y, int prevX, int prevY){
 	int incY = currUnit.getTransformedY(y);
 	int incprevX = currUnit.getTransformedX(prevX);
 	int incprevY = currUnit.getTransformedY(prevY);
-	for (int i=0; i<height/grid; i++){
-		for (int j=0; j<width/grid; j++){
-			graphicsForDrawing.drawLine(scrn[i][j].getX()+incX, scrn[i][j].getY()+incY, scrn[i][j].getX()+incprevX, scrn[i][j].getY()+incprevY);
+	for (int i=0; i<=height/grid_size; i++){
+		for (int j=0; j<=width/grid_size; j++){
+			center = scrn[i][j].getCenter();
+			int x1 = scrn[i][j].getX()+incX;
+			int y1 = scrn[i][j].getY()+incY;
+			int x2 = scrn[i][j].getX()+incprevX;
+			int y2 =  scrn[i][j].getY()+incprevY;
+			//System.out.print(utils.distFromCenter(center, x1, y1));
+			if(utils.distFromCenter(center, x1, y1)>grid_size/2 | utils.distFromCenter(center, x2, y2)>grid_size/2){
+				System.out.print(utils.distFromCenter(center, x1, y1));
+				utils.drawSimple((Graphics2D) graphicsForDrawing.create(), x1, y1, x2, y2,  Color.BLACK, null);
+			}else{
+				utils.rotateDraw((Graphics2D) graphicsForDrawing.create(), 12, x1, y1, x2,y2, center, Color.BLACK);
+			}
 		}
 	}
 	graphicsForDrawing.dispose();

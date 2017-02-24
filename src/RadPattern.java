@@ -11,19 +11,18 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 /**
- * 
- */
-
-/**
  * @author Shirley
- *
+ *Params: width, height, number of segments
+ *This class will split the screen into user-defined(nseg) segments. User drawings will be rotated 360 degrees around the screen
+ *nseg times. This will create a kaleidoscope-like effect.
+ *TODO: create a mirror effect within each segment
  */
+@SuppressWarnings("serial")
 public class RadPattern extends Pattern{
-
-	private float angle; //angle in radians
+	private int nseg;
 	public RadPattern(int w, int h, int nseg) {
 		super(w, h);
-		angle = 360/nseg;
+		this.nseg = nseg;
 		center.x = width/2;
 		center.y = height/2;
 		// TODO Auto-generated constructor stub
@@ -33,17 +32,7 @@ public class RadPattern extends Pattern{
 		super.paintComponent(g); 
 		graphicsForDrawing =(Graphics2D) g;
 		setUpDrawingGraphics(pen_size);
-		for(int i=0; i<=360/angle; i++){
-			Graphics2D g2d = (Graphics2D) g.create();
-			g2d.setColor(Color.black);
-			g2d.setStroke(new BasicStroke(3));
-			g2d.translate(width/2, height/2);
-			g2d.rotate(Math.toRadians(i*angle));
-			g2d.translate(-width/2, -height/2);
-			g2d.drawLine(center.x, -center.y, center.x, center.y);
-			g2d.dispose();
-		}
-
+		utils.rotateDraw((Graphics2D) g, nseg, center.x, -center.y, center.x, center.y, center, Color.black);
 	}
 
 	@Override
@@ -54,15 +43,8 @@ public class RadPattern extends Pattern{
 
 			int x = e.getX();   // x-coordinate of mouse.
 			int y = e.getY();   // y-coordinate of mouse.
-			for(int i=0; i<=360/angle; i++){
-				Graphics2D g2d = (Graphics2D) getGraphics();
-				g2d.setColor(Color.blue);
-				g2d.translate(width/2, height/2);
-				g2d.rotate(Math.toRadians(i*angle));
-				g2d.translate(-width/2, -height/2);
-				g2d.drawLine(prevX, prevY, x, y);
-				g2d.dispose();
-			}
+			Graphics2D g = (Graphics2D) graphicsForDrawing.create();
+			utils.rotateDraw(g, nseg, prevX, prevY, x, y, center, Color.CYAN);
 			prevX = x;  // Get ready for the next line segment in the curve.
 			prevY = y;
 	}
@@ -72,7 +54,7 @@ public class RadPattern extends Pattern{
 		// TODO Auto-generated method stub
 		int x = e.getX();   // x-coordinate where the user clicked.
 		int y = e.getY();   // y-coordinate where the user clicked.
-		System.out.println("click");
+		//System.out.println("click");
 		if (dragging == true)  // Ignore mouse presses that occur
 		return;            //    when user is already drawing a curve.
 		                 //    (This can happen if the user presses

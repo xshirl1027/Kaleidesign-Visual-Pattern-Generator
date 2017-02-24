@@ -16,7 +16,13 @@ public class Squnit {
 	public int getY(){
 		return this.localy;
 	}
-	
+	public Point getCenter(){
+		Point center = new Point();
+		center.x = this.localx+size/2;
+		center.y = this.localy+size/2;
+		return center;
+		
+	}
 	public int getTransformedX(int x){
 		return x-localx;
 	}
