@@ -116,7 +116,7 @@ private void drawAll(int x, int y, int prevX, int prevY){
 				System.out.print(utils.distFromCenter(center, x1, y1));
 				utils.drawSimple((Graphics2D) graphicsForDrawing.create(), x1, y1, x2, y2,  Color.BLACK, null);
 			}else{
-				utils.rotateDraw((Graphics2D) graphicsForDrawing.create(), 12, x1, y1, x2,y2, center, Color.BLACK);
+				utils.rotateDraw((Graphics2D) graphicsForDrawing.create(), 12, x1, y1, x2,y2, center, Color.BLACK, true);
 			}
 		}
 	}

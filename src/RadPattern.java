@@ -32,7 +32,7 @@ public class RadPattern extends Pattern{
 		super.paintComponent(g); 
 		graphicsForDrawing =(Graphics2D) g;
 		setUpDrawingGraphics(pen_size);
-		utils.rotateDraw((Graphics2D) g, nseg, center.x, -center.y, center.x, center.y, center, Color.black);
+		utils.rotateDraw((Graphics2D) g, nseg, center.x, -center.y, center.x, center.y, center, Color.black, false);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class RadPattern extends Pattern{
 			int x = e.getX();   // x-coordinate of mouse.
 			int y = e.getY();   // y-coordinate of mouse.
 			Graphics2D g = (Graphics2D) graphicsForDrawing.create();
-			utils.rotateDraw(g, nseg, prevX, prevY, x, y, center, Color.CYAN);
+			utils.rotateDraw(g, nseg, prevX, prevY, x, y, center, Color.CYAN, true);
 			prevX = x;  // Get ready for the next line segment in the curve.
 			prevY = y;
 	}
