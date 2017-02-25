@@ -20,3 +20,9 @@ How am I different from my competitors?
 -save and share features
 
 -price:free
+
+Features:
+-3D mesh(on/off)
+-pattern mesh(on/off)
+-lines and rays (clipping)
+-pattern created can be saved for another painting(resizable)
