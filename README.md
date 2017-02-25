@@ -23,6 +23,9 @@ How am I different from my competitors?
 
 Features:
 -3D mesh(on/off)
+
 -pattern mesh(on/off)
+
 -lines and rays (clipping)
+
 -pattern created can be saved for another painting(resizable)
