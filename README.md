@@ -25,6 +25,7 @@ Features:
 -3D mesh(on/off)
 
 -pattern mesh(on/off)
+   -alternative reflections, compressions, shearing
 
 -lines and rays (clipping)
 
