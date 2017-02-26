@@ -16,6 +16,9 @@ public class Squnit {
 	public int getY(){
 		return this.localy;
 	}
+	public int getSize(){
+		return this.size;
+	}
 	public Point getCenter(){
 		Point center = new Point();
 		center.x = this.localx+size/2;
