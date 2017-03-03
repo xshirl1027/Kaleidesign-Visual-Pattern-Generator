@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Stroke;
+import java.awt.geom.AffineTransform;
 
 public class utils {
 	
@@ -29,6 +30,16 @@ public class utils {
 			g2d.drawLine(x1, y1, x2, y2);
 			g2d.dispose();
 		}
+	}
+	
+	public static void scaleDraw(Graphics2D g, int x1, int y1, int x2, int y2, Color c, int initx, int inity){
+		Graphics2D g2d = (Graphics2D) g.create();
+		AffineTransform at = new AffineTransform();
+		g2d.setColor(c);
+		g2d.setStroke(new BasicStroke(2));
+		g2d.drawLine(x1, y1, x2, y2);
+		g2d.drawLine((int) (x1*0.6), (int)(y1*0.6),(int) (x2*0.6),(int) (y2*0.6));
+		g2d.dispose();
 	}
 	
 	public static Point findClosestCorner(int x, int y, Squnit s){

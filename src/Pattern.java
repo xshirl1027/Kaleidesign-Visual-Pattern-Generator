@@ -20,7 +20,7 @@ implements MouseListener, MouseMotionListener {
 	protected static int currentColor = BLACK; 
 	protected static int prevX, prevY;     // The previous location of the mouse.
 	protected static boolean dragging;      // This is set to true while the user is drawing.
-	protected static Graphics2D graphicsForDrawing;  // A graphics context for the panel
+	protected Graphics2D graphicsForDrawing;  // A graphics context for the panel
 	protected static int pen_size = 1;
 	protected static int width=0;    // Width of the panel.
 	protected static int height=0;
@@ -36,6 +36,7 @@ implements MouseListener, MouseMotionListener {
 		addMouseMotionListener(this);
 		width = w;
 		height = h;
+		graphicsForDrawing = (Graphics2D) getGraphics();
 	}
 	
 	public void setPenSize(int size){
@@ -43,7 +44,7 @@ implements MouseListener, MouseMotionListener {
 	}
 	
 	protected void setUpDrawingGraphics(int w) {
-		graphicsForDrawing = (Graphics2D) getGraphics();
+		
 		graphicsForDrawing.setStroke(new BasicStroke(w));
 		switch (currentColor) {
 		case BLACK:
@@ -54,6 +55,15 @@ implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (dragging == false)
+			return;  // Nothing to do because the user isn't drawing.
+
+			int x = e.getX();   // x-coordinate of mouse.
+			int y = e.getY();   // y-coordinate of mouse.
+			Graphics2D g = (Graphics2D) getGraphics();
+			g.drawLine(prevX, prevY, x, y);
+			prevX = x;  // Get ready for the next line segment in the curve.
+			prevY = y;
 		
 	}
 
@@ -72,12 +82,29 @@ implements MouseListener, MouseMotionListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		int x = e.getX();   // x-coordinate where the user clicked.
+		int y = e.getY();   // y-coordinate where the user clicked.
+		//System.out.println("click");
+		if (dragging == true)  // Ignore mouse presses that occur
+		return;            //    when user is already drawing a curve.
+		                 //    (This can happen if the user presses
+		                 //    two mouse buttons at the same time.)
+		else {
+		// The user has clicked on the white drawing area.
+		// Start drawing a curve from the point (x,y).
+		prevX = x;
+		prevY = y;
+		dragging = true;
+		}
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (dragging == false)
+			return;  // Nothing to do because the user isn't drawing.
+			dragging = false;
 		
 	}
 

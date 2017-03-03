@@ -73,7 +73,7 @@ public void mousePressed(MouseEvent evt) {
 	int x = evt.getX();   // x-coordinate where the user clicked.
 	int y = evt.getY();   // y-coordinate where the user clicked.
 	
-	
+
 	getSqunitAtMouse(height,width, x ,y);
 	
 	if (dragging == true)  // Ignore mouse presses that occur
@@ -86,17 +86,6 @@ public void mousePressed(MouseEvent evt) {
 
 } // end mousePressed()
 
-
-/**
-* Called whenever the user releases the mouse button. If the user was drawing 
-* a curve, the curve is done, so we should set drawing to false and get rid of
-* the graphics context that we created to use during the drawing.
-*/
-public void mouseReleased(MouseEvent evt) {
-	if (dragging == false)
-	return;  // Nothing to do because the user isn't drawing.
-	dragging = false;
-}
 
 private void drawAll(int x, int y, int prevX, int prevY){
 	graphicsForDrawing = (Graphics2D) getGraphics();

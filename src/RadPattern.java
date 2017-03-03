@@ -48,43 +48,7 @@ public class RadPattern extends Pattern{
 			prevX = x;  // Get ready for the next line segment in the curve.
 			prevY = y;
 	}
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		int x = e.getX();   // x-coordinate where the user clicked.
-		int y = e.getY();   // y-coordinate where the user clicked.
-		//System.out.println("click");
-		if (dragging == true)  // Ignore mouse presses that occur
-		return;            //    when user is already drawing a curve.
-		                 //    (This can happen if the user presses
-		                 //    two mouse buttons at the same time.)
-		else {
-		// The user has clicked on the white drawing area.
-		// Start drawing a curve from the point (x,y).
-		prevX = x;
-		prevY = y;
-		dragging = true;
-		}
 
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if (dragging == false)
-			return;  // Nothing to do because the user isn't drawing.
-			dragging = false;
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-	@Override
-	public void mouseExited(MouseEvent e) {}
-	@Override
-	public void mouseMoved(MouseEvent e) {}
-	@Override
-	public void mouseClicked(MouseEvent e) {}
 
 
 }
