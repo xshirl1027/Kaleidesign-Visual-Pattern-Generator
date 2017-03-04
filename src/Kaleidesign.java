@@ -23,7 +23,8 @@ public class Kaleidesign extends JApplet {
       window.setSize(1400,750);
       //RadPattern content = new RadPattern(1400,750,12);
       //GridPattern content = new GridPattern(1400,750,200);
-      BlankCanvas content = new BlankCanvas(1400,750);
+      //BlankCanvas content = new BlankCanvas(1400,750);
+      Pattern content = new ChaosPattern(1400, 750);
       content.setPenSize(3);
       window.setContentPane(content);
       window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -38,7 +39,8 @@ public class Kaleidesign extends JApplet {
    public void init() {
       //setContentPane( new RadPattern(1400,750,12) );
       //setContentPane( new GridPattern(1400,750,200) );
-	  setContentPane( new BlankCanvas(1400,750) );
+	  //setContentPane( new BlankCanvas(1400,750) );
+	  setContentPane( new ChaosPattern(1400,750) );
    }
    
 

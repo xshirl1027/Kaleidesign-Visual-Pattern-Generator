@@ -32,13 +32,13 @@ public class utils {
 		}
 	}
 	
-	public static void scaleDraw(Graphics2D g, int x1, int y1, int x2, int y2, Color c, int initx, int inity){
-		Graphics2D g2d = (Graphics2D) g.create();
+	public static void scaleDraw(Graphics2D g, int x1, int y1, int x2, int y2, Color c, int initx, int inity, float scale){
+		Graphics2D g2d = (Graphics2D) g;
 		AffineTransform at = new AffineTransform();
 		g2d.setColor(c);
 		g2d.setStroke(new BasicStroke(2));
 		g2d.drawLine(x1, y1, x2, y2);
-		g2d.drawLine((int) (x1*0.6), (int)(y1*0.6),(int) (x2*0.6),(int) (y2*0.6));
+		g2d.drawLine((int) (initx*(1-scale)+x1*scale), (int)(inity*(1-scale)+y1*scale),(int) (initx*(1-scale)+x2*scale),(int) (inity*(1-scale)+y2*scale));
 		g2d.dispose();
 	}
 	
@@ -87,6 +87,25 @@ public class utils {
 			}
 			g2d.dispose();
 		}
+	}
+	public static void rotateScaleDraw(Graphics2D g, int nseg, int x1, int y1, int x2, int y2, Point center, Color c, boolean ref, int initx, int inity, float scale, int num){
+		for(int i=0; i<=nseg; i++){
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setColor(c);
+			g2d.setStroke(new BasicStroke(2));
+			g2d.translate(center.x, center.y);
+			g2d.rotate(Math.toRadians(i*360/nseg));
+			g2d.translate(-center.x, -center.y);
+			utils.scaleDraw(g2d, x1, y1, x2, y2, c, initx, inity, 1);
+			utils.scaleDraw(g2d, x1, y1, x2, y2, c, initx, inity, scale);
+			if(ref){
+				utils.scaleDraw(g2d, center.x+(center.x-x1), y1, center.x+(center.x-x2), y2, c, initx, inity, 1);
+				utils.scaleDraw(g2d, center.x+(center.x-x1), y1, center.x+(center.x-x2), y2, c, initx, inity, scale);
+			}
+			g2d.dispose();
+			}
+			
+		
 	}
 	
 	

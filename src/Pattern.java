@@ -17,14 +17,15 @@ import java.util.ArrayList;
 public class Pattern extends JPanel
 implements MouseListener, MouseMotionListener {
 	protected final static int BLACK = 0;
-	protected static int currentColor = BLACK; 
-	protected static int prevX, prevY;     // The previous location of the mouse.
-	protected static boolean dragging;      // This is set to true while the user is drawing.
-	protected Graphics2D graphicsForDrawing;  // A graphics context for the panel
-	protected static int pen_size = 1;
-	protected static int width=0;    // Width of the panel.
-	protected static int height=0;
-	protected static Point center = new Point();
+	protected int currentColor = BLACK; 
+	protected int prevX, prevY;     // The previous location of the mouse.
+	protected boolean dragging;      // This is set to true while the user is drawing.
+	protected static Graphics2D graphicsForDrawing;  // A graphics context for the panel
+	protected int pen_size = 1;
+	protected int width=0;    // Width of the panel.
+	protected int height=0;
+	protected Point center = new Point();
+	protected int initx, inity;
 	/**
 	* Constructor sets the background color to be
 	* white and sets it to listen for mouse events on itself.
@@ -36,19 +37,24 @@ implements MouseListener, MouseMotionListener {
 		addMouseMotionListener(this);
 		width = w;
 		height = h;
-		graphicsForDrawing = (Graphics2D) getGraphics();
 	}
-	
+	public void paintComponent(Graphics g) {
+
+		super.paintComponent(g);  // Fill with background color (white).
+		
+		graphicsForDrawing = (Graphics2D) g;
+		setUpDrawingGraphics(pen_size);
+	}
 	public void setPenSize(int size){
 		pen_size = size;
 	}
 	
 	protected void setUpDrawingGraphics(int w) {
-		
 		graphicsForDrawing.setStroke(new BasicStroke(w));
 		switch (currentColor) {
 		case BLACK:
 		graphicsForDrawing.setColor(Color.BLACK);
+		graphicsForDrawing.setBackground(Color.blue);
 		break;
 		}
 	}
@@ -84,6 +90,8 @@ implements MouseListener, MouseMotionListener {
 		// TODO Auto-generated method stub
 		int x = e.getX();   // x-coordinate where the user clicked.
 		int y = e.getY();   // y-coordinate where the user clicked.
+		initx = x;
+		inity = y;
 		//System.out.println("click");
 		if (dragging == true)  // Ignore mouse presses that occur
 		return;            //    when user is already drawing a curve.
@@ -119,5 +127,7 @@ implements MouseListener, MouseMotionListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
