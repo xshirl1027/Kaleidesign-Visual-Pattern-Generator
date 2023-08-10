@@ -16,7 +16,7 @@ public class Kaleidesign extends JPanel implements ActionListener {
    static JMenu new_, pen_c, background_c, pen_style;
 
    // Menu items
-   static JMenuItem m1, m2, m3;
+   static JMenuItem m1, m2, m3, m4;
 
    // create a frame
    static JFrame f;
@@ -50,16 +50,19 @@ public class Kaleidesign extends JPanel implements ActionListener {
       m1 = new JMenuItem("Grid Pattern");
       m2 = new JMenuItem("Basic Pattern");
       m3 = new JMenuItem("Chaos Pattern");
+      m4 = new JMenuItem("Blank Canvas");
 
       // add ActionListener to menuItems
       m1.addActionListener(m);
       m2.addActionListener(m);
       m3.addActionListener(m);
+      m4.addActionListener(m);
 
       // add menu items to menu
       new_.add(m1);
       new_.add(m2);
       new_.add(m3);
+      new_.add(m4);
 
       // add menu to menu bar
       mb.add(new_);
@@ -89,6 +92,7 @@ public class Kaleidesign extends JPanel implements ActionListener {
       if(s=="Grid Pattern") content = new GridPattern(1400,750,200);
       if(s=="Basic Pattern") content = new RadPattern(1400,750,12);
       if(s=="Chaos Pattern") content = new ChaosPattern(1400,750);
+      if(s=="Blank Canvas") content = new Pattern(1400,750);
       //BlankCanvas content = new BlankCanvas(1400,750);
       //Pattern content = new Pattern(1400, 750);
       content.setPenSize(3);
