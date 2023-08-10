@@ -8,7 +8,7 @@ public class Kaleidesign extends JPanel implements ActionListener {
    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
    // menubar
    static JMenuBar mb;
 
@@ -23,6 +23,9 @@ public class Kaleidesign extends JPanel implements ActionListener {
 
    static JLabel l;
 
+   static Pattern content;
+   static JFrame window;
+
 /**
     * The main routine opens a window that displays a drawing area
     * and color palette.  This main routine allows this class to
@@ -31,8 +34,8 @@ public class Kaleidesign extends JPanel implements ActionListener {
     * class as an applet.
     */
    public static void main(String[] args) {
-      JFrame window = new JFrame("Simple Paint");
-      l = new JLabel("no pattern selected");
+      window = new JFrame("Simple Paint");
+      l = new JLabel("basic pattern");
       Kaleidesign m = new Kaleidesign();
       // create a menubar
       mb = new JMenuBar();
@@ -44,7 +47,7 @@ public class Kaleidesign extends JPanel implements ActionListener {
       background_c = new JMenu("Background Color");
 
       // create menuitems
-      m1 = new JMenuItem("Grid Patterns");
+      m1 = new JMenuItem("Grid Pattern");
       m2 = new JMenuItem("Basic Pattern");
       m3 = new JMenuItem("Chaos Pattern");
 
@@ -67,8 +70,8 @@ public class Kaleidesign extends JPanel implements ActionListener {
       window.setJMenuBar(mb);
       window.setSize(1400,750);
 
-      RadPattern content = new RadPattern(1400,750,12);
-      //GridPattern content = new GridPattern(1400,750,200);
+      //RadPattern content = new RadPattern(1400,750,12);
+      content = new RadPattern(1400,750,12);
       //BlankCanvas content = new BlankCanvas(1400,750);
       //Pattern content = new Pattern(1400, 750);
       content.setPenSize(3);
@@ -81,19 +84,15 @@ public class Kaleidesign extends JPanel implements ActionListener {
       String s = e.getActionCommand();
 
       // set the label to the menuItem that is selected
-      l.setText(s + " selected");
+      l.setText(s);
+      //RadPattern content = new RadPattern(1400,750,12);
+      if(s=="Grid Pattern") content = new GridPattern(1400,750,200);
+      if(s=="Basic Pattern") content = new RadPattern(1400,750,12);
+      if(s=="Chaos Pattern") content = new ChaosPattern(1400,750);
+      //BlankCanvas content = new BlankCanvas(1400,750);
+      //Pattern content = new Pattern(1400, 750);
+      content.setPenSize(3);
+      window.setContentPane(content);
    }
-   /**
-    * The init method of the applet simply creates a SimplePaintPanel and
-    * uses it as the content pane of the applet.  All the work is done
-    * by the SimplePaintPanel.
-    */
-   public void init() {
-    //setContentPane( new RadPattern(1400,750,12) );
-    //setContentPane( new GridPattern(1400,750,200) );
-	  //setContentPane( new BlankCanvas(1400,750) );
-	  //setContentPane( new Pattern(1400,750) );
-   }
-   
 
-} // end class SimplePaint
+}
