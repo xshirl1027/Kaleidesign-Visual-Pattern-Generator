@@ -8,4 +8,4 @@ todo:
 -create executable  
 -eraser
 
-![alt text]([https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true](https://github.com/xshirl1027/Kaleidesign-Visual-Pattern-Generator/blob/master/assets/Screen%20Shot%202023-08-16%20at%2011.57.50%20PM.png))
+!![Screenshot](assets/Screen%20Shot%202023-08-16%20at%2011.57.50%20PM.png)
