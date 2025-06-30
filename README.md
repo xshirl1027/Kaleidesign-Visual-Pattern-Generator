@@ -8,4 +8,4 @@ todo:
 -create executable  
 -eraser
 
-!![Screenshot](assets/Screen%20Shot%202023-08-16%20at%2011.57.50%20PM.png)
+![Screenshot](assets/Screen%20Shot%202023-08-16%20at%2011.57.50%20PM.png)
